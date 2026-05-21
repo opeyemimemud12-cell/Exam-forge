@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ExamForge — School Exam Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- LOADING SCREEN -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-content">
+      <div class="loading-book">
+        <div class="book-cover"></div>
+        <div class="book-page page1"></div>
+        <div class="book-page page2"></div>
+        <div class="book-page page3"></div>
+      </div>
+      <h1 class="loading-title">ExamForge</h1>
+      <p class="loading-sub">Preparing your classroom...</p>
+      <div class="loading-bar"><div class="loading-fill"></div></div>
+      <div class="loading-emojis">
+        <span>⭐</span><span>📚</span><span>✏️</span><span>🎓</span><span>⭐</span>
+      </div>
+    </div>
+    <div class="floating-letters">
+      <span>A</span><span>B</span><span>C</span><span>+</span><span>✓</span>
+      <span>📖</span><span>✏️</span><span>🔬</span><span>📐</span><span>🌟</span>
+    </div>
+  </div>
+
+  <!-- MAIN MENU -->
+  <div id="main-menu" class="main-menu" style="display:none;">
+    <div class="menu-bg-letters">
+      <span>A</span><span>B</span><span>C</span><span>+</span><span>✓</span>
+      <span>📖</span><span>✏️</span><span>🔬</span><span>📐</span><span>🌟</span>
+    </div>
+    <div class="menu-content">
+      <div class="menu-logo">
+        <div class="menu-logo-icon">📚</div>
+        <h1 class="menu-title">ExamForge</h1>
+        <p class="menu-subtitle">School Exam Platform</p>
+      </div>
+      <div class="menu-cards">
+        <div class="menu-card" id="menu-create">
+          <div class="menu-card-glow"></div>
+          <div class="menu-card-icon">✏️</div>
+          <div class="menu-card-title">Create Exam</div>
+          <div class="menu-card-desc">Build multiple-choice exams with images, timer &amp; security</div>
+          <div class="menu-card-arrow">→</div>
+        </div>
+        <div class="menu-card" id="menu-exams">
+          <div class="menu-card-glow"></div>
+          <div class="menu-card-icon">📋</div>
+          <div class="menu-card-title">All Exams</div>
+          <div class="menu-card-desc">View, start, manage and review all your saved exams</div>
+          <div class="menu-card-arrow">→</div>
+        </div>
+        <div class="menu-card" id="menu-import">
+          <div class="menu-card-glow"></div>
+          <div class="menu-card-icon">📥</div>
+          <div class="menu-card-title">Import Exam</div>
+          <div class="menu-card-desc">Load an exam from a .json file exported from ExamForge</div>
+          <div class="menu-card-arrow">→</div>
+          <input type="file" id="menu-import-file" accept=".json" style="display:none" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OVERLAYS -->
+
+  <!-- ANTI-CHEAT -->
+  <div id="anticheat-overlay" class="overlay-backdrop" style="display:none;">
+    <div class="anticheat-box">
+      <div class="anticheat-siren">🚨</div>
+      <h1 class="anticheat-title">EXAM INTEGRITY NOTICE</h1>
+      <div class="anticheat-divider"></div>
+      <div class="anticheat-body">
+        <p class="ac-warning-line">🔒 <strong>THIS IS A MONITORED EXAM SESSION</strong></p>
+        <ul class="ac-rules">
+          <li>🚫 Switching tabs or windows will <strong>AUTO-SUBMIT</strong> your exam</li>
+          <li>⏱️ When the timer hits zero, your exam is <strong>AUTO-SUBMITTED</strong></li>
+          <li>📵 No external resources or assistance permitted</li>
+          <li>👁️ All activity is <strong>LOGGED</strong> to the session console</li>
+          <li>🔐 Any circumvention attempt will be recorded</li>
+        </ul>
+        <div class="ac-stamp">BY CONTINUING YOU AGREE TO THESE TERMS</div>
+      </div>
+      <div class="ac-buttons">
+        <button id="ac-cancel-btn" class="btn-ac-cancel">← Go Back</button>
+        <button id="ac-accept-btn" class="btn-ac-accept">I Understand — Begin Exam 🎓</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAME INPUT -->
+  <div id="name-overlay" class="overlay-backdrop" style="display:none;">
+    <div class="name-box">
+      <div class="name-icon">🎓</div>
+      <h2>Welcome, Student!</h2>
+      <p>Enter your full name to begin</p>
+      <div class="name-exam-title" id="name-exam-display"></div>
+      <input type="text" id="student-name-input" placeholder="Your full name..." maxlength="60" autocomplete="off" />
+      <button id="name-continue-btn" class="btn-primary">Continue →</button>
+    </div>
+  </div>
+
+  <!-- EDIT CODE -->
+  <div id="editcode-overlay" class="overlay-backdrop" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-icon">🔐</div>
+      <h2>Enter Edit Code</h2>
+      <p>This exam is protected. Enter the edit code to modify it.</p>
+      <input type="password" id="editcode-input" placeholder="Edit code..." autocomplete="off" />
+      <div class="modal-error hidden" id="editcode-error">❌ Incorrect code. Try again.</div>
+      <div class="modal-buttons">
+        <button id="editcode-cancel" class="btn-secondary">Cancel</button>
+        <button id="editcode-confirm" class="btn-primary">Unlock 🔓</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESET CODE -->
+  <div id="resetcode-overlay" class="overlay-backdrop" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-icon">🔄</div>
+      <h2>Reset Exam</h2>
+      <p>Enter the master reset code or this exam's edit/reset code to unlock it.</p>
+      <input type="password" id="resetcode-input" placeholder="Reset code..." autocomplete="off" />
+      <div class="modal-error hidden" id="resetcode-error">❌ Incorrect code.</div>
+      <div class="modal-buttons">
+        <button id="resetcode-cancel" class="btn-secondary">Cancel</button>
+        <button id="resetcode-confirm" class="btn-primary">Reset ✅</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results-overlay" class="overlay-backdrop" style="display:none;">
+    <div class="results-box">
+      <div class="results-confetti" id="results-confetti"></div>
+      <div class="results-header">
+        <div class="results-grade-badge" id="results-grade-badge">A</div>
+        <h1 id="results-title">Exam Complete!</h1>
+        <p id="results-student-name"></p>
+      </div>
+      <div class="results-stats">
+        <div class="stat-card">
+          <div class="stat-num" id="res-score">0</div>
+          <div class="stat-label">Score</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="res-percent">0%</div>
+          <div class="stat-label">Percentage</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="res-grade">A</div>
+          <div class="stat-label">Grade</div>
+        </div>
+      </div>
+      <div class="results-remark" id="results-remark"></div>
+      <div class="results-pass-fail" id="results-pass-fail"></div>
+      <div class="bestie-final" id="bestie-final" style="display:none;"></div>
+      <button id="results-done-btn" class="btn-primary">Done — View Results 📋</button>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="app" style="display:none;">
+
+    <header class="site-header">
+      <button class="home-btn" id="home-btn">🏠 Menu</button>
+      <div class="logo">
+        <span class="logo-icon">📚</span>
+        <span class="logo-text">ExamForge</span>
+      </div>
+      <nav class="tab-nav">
+        <button class="tab-btn" data-tab="create">✏️ Create</button>
+        <button class="tab-btn" data-tab="exams">📋 Exams</button>
+      </nav>
+    </header>
+
+    <div class="floating-deco" id="floating-deco">
+      <span class="deco-item">📐</span><span class="deco-item">✏️</span>
+      <span class="deco-item">🔬</span><span class="deco-item">📏</span>
+      <span class="deco-item">🌟</span>
+    </div>
+
+    <!-- CREATE TAB -->
+    <div id="tab-create" class="tab-content" style="display:none;">
+      <div class="section-header">
+        <h2>✏️ Create New Exam</h2>
+        <p>Fill in details, add questions, then save.</p>
+      </div>
+      <div class="create-form card">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>📝 Exam Title</label>
+            <input type="text" id="exam-title" placeholder="e.g. Biology Chapter 5 Test" />
+          </div>
+          <div class="form-group">
+            <label>⏱️ Time Limit (minutes, 0 = unlimited)</label>
+            <input type="number" id="exam-time" min="0" value="0" />
+          </div>
+          <div class="form-group">
+            <label>🏆 Maximum Score</label>
+            <input type="number" id="exam-max-score" min="1" value="100" />
+          </div>
+          <div class="form-group">
+            <label>✅ Passing Score</label>
+            <input type="number" id="exam-pass-score" min="0" value="50" />
+          </div>
+          <div class="form-group">
+            <label>🔐 Edit Code <span class="label-hint">(locks the exam from edits)</span></label>
+            <input type="password" id="exam-edit-code" placeholder="Leave blank for no lock" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label>🔄 Reset Code <span class="label-hint">(needed to reset after taken)</span></label>
+            <input type="password" id="exam-reset-code" placeholder="Optional custom reset code" autocomplete="off" />
+          </div>
+        </div>
+        <div class="questions-section">
+          <div class="qs-header">
+            <h3>📋 Questions</h3>
+            <button id="add-question-btn" class="btn-add">+ Add Question</button>
+          </div>
+          <div id="questions-list"></div>
+        </div>
+        <div class="create-actions">
+          <button id="save-exam-btn" class="btn-primary">💾 Save Exam</button>
+          <button id="export-exam-btn" class="btn-secondary">📤 Export (.json)</button>
+          <button id="clear-form-btn" class="btn-secondary">🗑️ Clear Form</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALL EXAMS TAB -->
+    <div id="tab-exams" class="tab-content" style="display:none;">
+      <div class="section-header">
+        <h2>📋 All Exams</h2>
+        <p>Click Start to begin. Actions appear on each exam card.</p>
+      </div>
+      <div id="exams-list" class="exams-grid"></div>
+    </div>
+
+    <!-- TAKE EXAM TAB — everything on one canvas -->
+    <div id="tab-take" class="tab-content tab-take-full" style="display:none;">
+      <div class="exam-canvas">
+
+        <!-- ── CARD: info header + timer + progress + question + options + nav + submit ── -->
+        <div class="exam-single-card">
+
+          <!-- Row 1: exam title + student left  |  timer right -->
+          <div class="ec-header">
+            <div class="ec-header-left">
+              <div class="ec-exam-title" id="taking-exam-title">Exam</div>
+              <div class="ec-student" id="taking-student">👤 Student</div>
+            </div>
+            <div class="ec-timer" id="timer-widget">
+              <div class="timer-ring-wrap">
+                <svg class="timer-ring" viewBox="0 0 56 56">
+                  <circle class="timer-ring-bg" cx="28" cy="28" r="24"/>
+                  <circle class="timer-ring-fill" id="timer-ring-fill" cx="28" cy="28" r="24"/>
+                </svg>
+                <div class="timer-inner">
+                  <div class="timer-display" id="timer-display">∞</div>
+                </div>
+              </div>
+              <div class="timer-label-below">TIME</div>
+            </div>
+          </div>
+
+          <!-- Row 2: thin progress bar -->
+          <div class="ec-progress">
+            <div class="ec-progress-fill" id="exam-progress-fill"></div>
+            <span class="ec-progress-label" id="exam-progress-label">Q 1 / 1</span>
+          </div>
+
+          <!-- Row 3: question + options  (scrolls if needed) -->
+          <div class="ec-body" id="exam-question-stage">
+            <!-- filled by JS -->
+          </div>
+
+          <!-- Row 4: prev / dots / next -->
+          <div class="ec-nav">
+            <button id="exam-prev-btn" class="btn-nav">◀ Prev</button>
+            <div class="exam-nav-dots" id="exam-nav-dots"></div>
+            <button id="exam-next-btn" class="btn-nav">Next ▶</button>
+          </div>
+
+          <!-- Row 5: submit -->
+          <div class="ec-submit">
+            <button id="submit-exam-btn" class="btn-submit">Submit Exam 🎓</button>
+          </div>
+
+        </div><!-- /exam-single-card -->
+      </div><!-- /exam-canvas -->
+    </div>
+
+    <!-- CORRECTIONS TAB -->
+    <div id="tab-corrections" class="tab-content" style="display:none;">
+      <div class="section-header">
+        <h2>📋 Exam Corrections</h2>
+        <p>Green = correct answer &nbsp;|&nbsp; Red = your wrong answer</p>
+      </div>
+      <div id="corrections-list" class="corrections-container"></div>
+      <div class="corrections-actions">
+        <button id="back-to-exams-btn" class="btn-secondary">← Back to Exams</button>
+      </div>
+    </div>
+
+  </div><!-- /app -->
+
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/bestie.js"></script>
+  <script src="js/exam.js"></script>
+  <script src="js/anticheat.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

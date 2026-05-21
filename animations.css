@@ -1,0 +1,20 @@
+/* =============================================
+   EXAMFORGE — ANIMATIONS.CSS
+   ============================================= */
+
+/* Floating letters on loading bg */
+.floating-letters{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.floating-letters span{position:absolute;font-size:clamp(1.5rem,4vw,3rem);opacity:0;animation:floatUp 4s ease-in infinite;font-weight:800;}
+.floating-letters span:nth-child(1){left:5%;animation-delay:0s;color:rgba(244,131,31,.14);}
+.floating-letters span:nth-child(2){left:15%;animation-delay:.4s;color:rgba(59,130,246,.14);}
+.floating-letters span:nth-child(3){left:25%;animation-delay:.8s;color:rgba(34,197,94,.14);}
+.floating-letters span:nth-child(4){left:35%;animation-delay:1.2s;color:rgba(234,179,8,.14);}
+.floating-letters span:nth-child(5){left:45%;animation-delay:1.6s;color:rgba(139,92,246,.14);}
+.floating-letters span:nth-child(6){left:55%;animation-delay:.2s;color:rgba(244,131,31,.14);}
+.floating-letters span:nth-child(7){left:65%;animation-delay:.6s;color:rgba(59,130,246,.14);}
+.floating-letters span:nth-child(8){left:75%;animation-delay:1s;color:rgba(34,197,94,.14);}
+.floating-letters span:nth-child(9){left:85%;animation-delay:1.4s;color:rgba(234,179,8,.14);}
+.floating-letters span:nth-child(10){left:93%;animation-delay:1.8s;color:rgba(139,92,246,.14);}
+@keyframes floatUp{0%{transform:translateY(110vh) rotate(0);opacity:0;}10%{opacity:1;}90%{opacity:.8;}100%{transform:translateY(-10vh) rotate(30deg);opacity:0;}}
+
+@keyframes bounce{from{transform:translateY(0);}to{transform:translateY(-8px);}}
