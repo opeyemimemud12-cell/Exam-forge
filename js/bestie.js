@@ -252,9 +252,9 @@ const Bestie = {
     } else {
       lines.push("bro... bro. BRO. 😭💀");
       if (unanswered > 0) lines.push(`you left ${unanswered} questions blank?? walahi the audacity 😭`);
-      lines.push("this is giving 'walahi spin' energy and not in a good way 💀");
+      lines.push("this is just sad bruh 😭");
       if (totalRoasts > 10) lines.push(`I roasted you ${totalRoasts} times and it didn't even help 😭 you're immune to shame`);
-      lines.push("we gotta study together next time fr. or just study. ONCE. please. 🙏");
+      lines.push("next time study for real intead of doom scrolling on YouTube😭");
     }
 
     // Subject-specific closer
