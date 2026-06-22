@@ -96,13 +96,13 @@ const Bestie = {
   // ── meme references ──────────────────────────
   _memeRef() {
     const memes = [
-      "walahi SPIN 😭💀",
+      "Bro finally regretting not studying 😭💀",
       "bro said haaa 💀",
-      "this is giving 'i forgor 💀' energy",
+      "this is giving 'i forgot 💀' energy",
       "NO CAP THIS IS EMBARRASSING 😭",
       "ratio + L + bozo 💀",
-      "skill issue fr fr",
-      "touch grass after this bestie 🌿",
+      "skill issue  fr",
+      "touch grass after this bro 🌿",
       "the math ain't mathing 💀",
       "we are NOT the same 😭",
       "slay... but make it WRONG 💀",
@@ -110,7 +110,7 @@ const Bestie = {
       "bro really said 'it's giving' and gave NOTHING 💀",
       "this ain't it chief 😭",
       "caught in 4K struggling 💀📸",
-      "bro said walahi spin and then FROZE 😭💀",
+      "Bozo alert 😭💀",
       "not the trauma response to a multiple choice question 😭",
       "lowkey ate but mostly choked no cap 💀",
       "the delulu to real pipeline failed fr 😭",
@@ -204,7 +204,7 @@ const Bestie = {
     const reactions = {
       finally: [
         "FINALLY omg I was about to call your parents 😭",
-        "took you long enough bestie 💀 sheesh",
+        "took you long enough bro 💀 sheesh",
         "bro finally moved. the nation can rest 😭",
         "walahi I aged watching you do that 💀",
         "slay... but make it LATE 😭",
